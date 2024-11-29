@@ -1,0 +1,119 @@
+/* Galvenā header stils */
+.header {
+    padding: 10px 20px; /* Augšējais un apakšējais ielāde */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Viegls ēnojums */
+    position: fixed; /* Fiksēts pozīcija */
+    top: 0; /* Attālums no augšas */
+    left: 0; /* Attālums no kreisās puses */
+    right: 0; /* Attālums no labās puses */
+    z-index: 1000; /* Z-index, lai pārliecinātos, ka tas ir virs citiem elementiem */
+}
+
+.backdrop {
+    position: fixed; /* Fiksēta pozīcija */
+    top: 0; /* Augšējais attālums */
+    left: 0; /* Kreisais attālums */
+    right: 0; /* Labais attālums */
+    bottom: 0; /* Apakšējais attālums */
+    background: rgba(0, 0, 0, 0.5); /* Tumšs caurspīdīgs fons */
+    backdrop-filter: blur(5px); /* Izplūšana */
+    display: none; /* Sākumā slēpj */
+    z-index: 999; /* Zem navigācijas joslas */
+}
+
+.backdrop.active {
+    display: block; 
+}
+
+.navbar {
+    display: flex; /* Iestatām flexbox */
+    justify-content: center; /* Horizontāli centrē visas pogas */
+    align-items: center; /* Vertikāli izlīdzina */
+}
+
+/* Logotipa stils */
+.logo img {
+    height: 150px; /* Logotipa augstums */
+    margin-right: 100px; /* Atstāj logotipa vietu, lai pogas būtu centrētas */
+}
+
+
+
+/* Hamburgera pogas stils */
+.hamburgerBtn {
+    color: #f8f8f8;
+    display: none; /* Sākumā slēpj hamburgera pogu */
+}
+
+/* Navigācijas saišu saraksts */
+.links {
+    list-style: none; /* Noņem saraksta stilu */
+    display: flex; /* Iestatām flexbox */
+    gap: 20px; /* Attālums starp saitēm */
+    align-items: center; /* Vertikāli centrēts */
+}
+
+/* Universāla stils visām saitēm */
+.linkButton {
+    padding: 10px 15px; /* Ielāde ap saitēm */
+    text-decoration: none; /* Noņem zemsvītras */
+    border-radius: 5px; /* Noapaļo stūrus */
+    color: white; /* Balta teksta krāsa */
+    transition: background-color 0.3s; /* Pārejas efekts */
+    text-align: center; /* Centrē tekstu pogās */
+}
+
+/* Pārejas efekts uz saitēm */
+.linkButton:hover {
+    background-color: #0056b3; /* Tumšāka zila krāsa peldošai */
+}
+
+/* Slēpj hamburgera izvēlnes checkbox */
+#menu-toggle {
+    display: none; /* Paslēpj checkbox */
+}
+
+/* Mediju vaicājumi mobilajām ierīcēm */
+@media (max-width: 768px) {
+    /* Hamburgera pogas rādīšana mobilajā versijā */
+    .hamburgerBtn {
+        display: block; /* Rāda hamburgera pogu, kad ekrāns ir mazāks par 768px */
+    }
+
+    .links {
+        display: none; /* Sākumā slēpj saites */
+        flex-direction: column; /* Izlīdzina vertikāli */
+        background-color: #f8f8f8; /* Fons sarakstam */
+        position: absolute; /* Pozicionē sarakstu */
+        top: 60px; /* Attālums no augšas */
+        right: 0; /* Izlīdzina sarakstu labajā pusē */
+        width: 100%; /* Pilna platums */
+        padding: 10px 0; /* Ielāde iekšā */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Viegls ēnojums */
+    }
+
+    /* Rāda saites, kad hamburgera poga ir aktivizēta */
+    .links.active {
+        display: flex; /* Rāda saites, kad hamburgera poga ir aktivizēta */
+    }
+
+    /* Visu saišu un pogu līmeņošana */
+    .links li {
+        display: flex; /* Flexbox izlīdzināšanai */
+        justify-content: center; /* Horizontāla centrēšana */
+        align-items: center; /* Vertikāla centrēšana */
+        padding: 10px 0; /* Ielāde ap saitēm */
+        width: 100%; /* Pilna platums, lai pogas aizņemtu visu rindu */
+    }
+}
+
+/* Ekrāna izmēram virs 768px */
+@media (min-width: 769px) {
+    .hamburgerBtn {
+        display: none; /* Slēpj hamburgera pogu, kad ekrāns ir lielāks par 768px */
+    }
+
+    .links {
+        display: flex; /* Rāda saites, kad ekrāns ir lielāks par 768px */
+    }
+}

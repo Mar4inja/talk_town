@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Асинхронное действие для получения данных профиля
+// Асинхронные действия для получения, обновления данных профиля и поиска пользователей
+
+// Получение данных профиля
 export const fetchProfileData = createAsyncThunk(
   "profile/fetchProfileData",
   async (_, { rejectWithValue }) => {
@@ -13,15 +15,15 @@ export const fetchProfileData = createAsyncThunk(
           Authorization: `Bearer ${token}`, // Добавляем токен в заголовок
         },
       });
-      if (!response.ok) throw new Error("Failed to fetch profile data"); // Если ответ не OK, выбрасываем ошибку
+      if (!response.ok) throw new Error("Failed to fetch profile data"); // Ошибка при получении данных
       return await response.json(); // Возвращаем данные в формате JSON
     } catch (error) {
-      return rejectWithValue(error.message); // Обработка ошибок
+      return rejectWithValue(error.message); // Обработка ошибки
     }
   }
 );
 
-// Асинхронное действие для обновления данных профиля
+// Обновление данных профиля
 export const updateProfileData = createAsyncThunk(
   "profile/updateProfileData",
   async (updatedData, { rejectWithValue }) => {
@@ -33,17 +35,42 @@ export const updateProfileData = createAsyncThunk(
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, // Добавляем токен в заголовок
         },
-        body: JSON.stringify(updatedData), // Отправляем обновленные данные
+        body: JSON.stringify(updatedData), // Отправка обновленных данных
       });
-      if (!response.ok) throw new Error("Failed to update profile data"); // Если ответ не OK, выбрасываем ошибку
-      return await response.json(); // Возвращаем обновленные данные в формате JSON
+      if (!response.ok) throw new Error("Failed to update profile data"); // Ошибка при обновлении данных
+      return await response.json(); // Возвращаем обновленные данные
     } catch (error) {
-      return rejectWithValue(error.message); // Обработка ошибок
+      return rejectWithValue(error.message); // Обработка ошибки
     }
   }
 );
 
-// Слайс профиля
+// Поиск пользователей по имени и фамилии
+export const searchUsers = createAsyncThunk(
+  "profile/searchUsers",
+  async ({ firstName, lastName }, { rejectWithValue }) => {
+    try {
+      // Если указаны оба параметра, отправляется запрос с обоими
+      const query = new URLSearchParams();
+      if (firstName) query.append("firstName", firstName);
+      if (lastName) query.append("lastName", lastName);
+      
+      const response = await fetch(`http://localhost:8080/api/users/search?${query.toString()}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) throw new Error("Failed to search users");
+      return await response.json(); // Возвращаем найденных пользователей
+    } catch (error) {
+      return rejectWithValue(error.message); // Обработка ошибки
+    }
+  }
+);
+
+// Слайс для профиля
 const profileSlice = createSlice({
   name: "profile", // Имя слайса
   initialState: {
@@ -52,11 +79,12 @@ const profileSlice = createSlice({
       lastName: "", // Фамилия
       email: "", // Email
       birthDate: "", // Дата рождения
-      picture: "", // Ссылка на изображение профиля (может быть пустой)
+      picture: "", // Ссылка на изображение профиля
     },
     status: "idle", // Состояние загрузки
     error: null, // Ошибки
-    isEditing: false, // Флаг редактирования
+    isEditing: false, // Режим редактирования
+    searchedUsers: [], // Массив найденных пользователей
   },
   reducers: {
     toggleEditMode: (state) => {
@@ -75,39 +103,54 @@ const profileSlice = createSlice({
       state.error = null;
       state.isEditing = false;
     },
+    resetSearch: (state) => {
+      state.searchedUsers = []; // Очистка результатов поиска
+    }
   },
   extraReducers: (builder) => {
     builder
-      // Обработка получения данных профиля
+      // Загрузка данных профиля
       .addCase(fetchProfileData.pending, (state) => {
-        state.status = "loading"; // Устанавливаем статус "загрузка"
+        state.status = "loading"; // Устанавливаем статус "loading"
       })
       .addCase(fetchProfileData.fulfilled, (state, action) => {
         state.status = "succeeded"; // Успешная загрузка
-        state.data = action.payload; // Сохраняем данные в store
+        state.data = action.payload; // Сохраняем данные профиля
       })
       .addCase(fetchProfileData.rejected, (state, action) => {
         state.status = "failed"; // Ошибка загрузки
-        state.error = action.payload; // Сохраняем сообщение об ошибке
+        state.error = action.payload; // Сохраняем ошибку
       })
-      // Обработка обновления данных профиля
+      // Обновление данных профиля
       .addCase(updateProfileData.pending, (state) => {
-        state.status = "loading"; // Устанавливаем статус "загрузка"
+        state.status = "loading"; // Устанавливаем статус "loading"
       })
       .addCase(updateProfileData.fulfilled, (state, action) => {
         state.status = "succeeded"; // Успешное обновление
-        state.data = action.payload; // Обновляем данные профиля в store
-        state.isEditing = false; // Выходим из режима редактирования
+        state.data = action.payload; // Обновляем данные профиля
+        state.isEditing = false; // Выход из режима редактирования
       })
       .addCase(updateProfileData.rejected, (state, action) => {
         state.status = "failed"; // Ошибка обновления
-        state.error = action.payload; // Сохраняем сообщение об ошибке
+        state.error = action.payload; // Сохраняем ошибку
+      })
+      // Поиск пользователей
+      .addCase(searchUsers.pending, (state) => {
+        state.status = "loading"; // Устанавливаем статус "loading"
+      })
+      .addCase(searchUsers.fulfilled, (state, action) => {
+        state.status = "succeeded"; // Успешный поиск
+        state.searchedUsers = action.payload; // Сохраняем найденных пользователей
+      })
+      .addCase(searchUsers.rejected, (state, action) => {
+        state.status = "failed"; // Ошибка поиска
+        state.error = action.payload; // Сохраняем ошибку
       });
   },
 });
 
-// Экспорт действий
-export const { toggleEditMode, resetProfile } = profileSlice.actions;
+// Экспортируем действия
+export const { toggleEditMode, resetProfile, resetSearch } = profileSlice.actions;
 
 // Экспорт редьюсера
 export default profileSlice.reducer;

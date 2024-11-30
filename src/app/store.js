@@ -6,6 +6,7 @@ import loginReducer from '../features/auth/loginSlice'; // Pareizs login reducē
 import mainPageReducer from '../features/mainPage/mainPageSlice';
 import profileReducer from '../features/profile/profileSlice';
 
+
 // Redux Persist konfigurācija
 const persistConfig = {
   key: 'root',  // Atslēga glabāšanai
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   mainPage: mainPageReducer,
   profile: profileReducer,
+
 });
 
 // Persistējam reducētāju

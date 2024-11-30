@@ -4,6 +4,7 @@ import Profile from "./pages/profile/Profile";
 import MainPage from "./pages/mainPage/MainPage";
 import App from "./pages/auth/Auth"; // Ensure this import is correct
 
+
 const MyRoutes = () => {
   return (
     <Routes>

@@ -52,7 +52,7 @@ const Navbar = () => {
         </label>
         <ul className={`${styles.links} ${isMenuOpen ? styles.active : ''}`}>
           <li><Link to="/mainPage" className={styles.linkButton}>Home</Link></li>
-
+         
           {/* Profile poga tiek parādīta tikai tad, ja lietotājs ir ielogojies */}
           {isAuthenticated && (
             <li><Link to="/profile" className={styles.linkButton}>Profile</Link></li>

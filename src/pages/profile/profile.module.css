@@ -10,7 +10,6 @@
   height: 900px;
 }
 
-/* Other classes */
 .profileView {
   position: absolute;
   left: 5%;
@@ -45,8 +44,6 @@
   margin-bottom: 20px;
 }
 
-/* Other style parts... */
-
 .profileDetails,
 .editDetails {
   width: 100%;
@@ -56,7 +53,6 @@
 .profileDetails h2 {
   margin-bottom: 10px;
   font-size: 1.5em;
-  /* Slightly larger font for headings */
 }
 
 .profileDetails p {
@@ -91,40 +87,76 @@ button:hover {
 }
 
 /* Search Bar Styles */
-.searchBarContainer {
+.searchBar {
   display: flex;
-  justify-content: center;
-  width: 100%;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.searchBar {
-  width: 300px;
-  padding: 10px;
+.searchBar input {
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 1em;
+  margin-right: 10px;
+  width: 300px;
 }
 
-.searchBarButton {
-  padding: 10px 20px;
-  margin-left: 10px;
+.searchBar button {
+  position: relative;
+  top: 1%;
+  padding: 8px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #007BFF;
+  background-color: #4CAF50;
   color: white;
   cursor: pointer;
 }
 
-.searchBarButton:hover {
-  background-color: #0056b3;
+.searchBar button:hover {
+  background-color: #45a049;
 }
+
+.searchResults ul {
+  list-style-type: none; /* Removes the default list marker */
+  padding: 0; /* Removes default padding */
+}
+
+.profileItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.guestProfilePictureContainer {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 5%;
+  margin-bottom: 10px;
+}
+
+.guestProfilePicture {
+  max-width: 90%;
+  max-height: 90%;
+opacity: 40%;
+  object-fit: cover;
+}
+
+.profileName {
+  font-weight: bold;
+  text-align: center;
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .profileContainer {
     padding: 15px;
-    /* Adjust padding for smaller screens */
   }
 
   .profileView,
@@ -134,24 +166,16 @@ button:hover {
 
   .profileDetails h2 {
     font-size: 1.3em;
-    /* Reduce heading size for smaller screens */
   }
 
   .profileDetails p {
     font-size: 0.9em;
-    /* Reduce text size for readability */
-  }
-
-  .searchBar {
-    width: 80%;
-    /* Make the search bar more responsive */
   }
 }
 
 @media (max-width: 480px) {
   .profileContainer {
     padding: 10px;
-    /* Adjust padding for the smallest screens */
   }
 
   .profileView,
@@ -161,32 +185,14 @@ button:hover {
 
   .profilePicture {
     width: 80px;
-    /* Smaller profile picture */
     height: 80px;
   }
 
   .profileDetails h2 {
     font-size: 1.1em;
-    /* Even smaller heading for smallest screens */
   }
 
   .profileDetails p {
     font-size: 0.8em;
-    /* Smaller text for better fit */
-  }
-
-  button {
-    padding: 8px 16px;
-    margin-top: 15px;
-  }
-
-  .searchBar {
-    width: 100%;
-    /* Full width for smallest screens */
-  }
-
-  .searchBarButton {
-    padding: 8px 16px;
-    /* Adjust button size for smaller screens */
   }
 }

@@ -11,7 +11,7 @@ import profileReducer from '../features/profile/profileSlice';
 const persistConfig = {
   key: 'root',  // Atslēga glabāšanai
   storage,      // Glabāšanas mehānisms (localStorage)
-  whitelist: ['login', 'mainPage'],  // Pievienojam arī 'mainPage', lai tas tiktu persistēts
+  whitelist: ['login', 'mainPage', 'profile'],  // Pievienojam arī 'mainPage', lai tas tiktu persistēts
 };
 
 

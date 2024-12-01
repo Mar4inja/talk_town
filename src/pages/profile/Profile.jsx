@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProfileData, updateProfileData, toggleEditMode, searchUsers } from '../../features/profile/profileSlice';
+import { fetchProfileData, updateProfileData, toggleEditMode, searchUsers, resetSearch } from '../../features/profile/profileSlice';
 import styles from './profile.module.css';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Correct named import
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Profile = () => {
   useEffect(() => {
     if (token) {
       try {
-        const decoded = jwtDecode(token);
+        const decoded = jwtDecode(token); // Correct usage of jwtDecode
         setDecodedBirthDate(decoded.birthDate);
       } catch (error) {
         console.error("Error decoding the token:", error);
@@ -26,6 +26,8 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(fetchProfileData());
+    // Reset search results on page refresh
+    dispatch(resetSearch());
   }, [dispatch]);
 
   useEffect(() => {
@@ -78,14 +80,15 @@ const Profile = () => {
   };
 
   const handleSearchChange = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
+    setSearchQuery(e.target.value);
+  };
 
-    // Pārbaudām, vai query nav tukšs
-    if (query.trim()) {
-      dispatch(searchUsers(query)); // Ja ir ievadīts teksts, izsistam meklēšanas pieprasījumu
+  const handleSearchClick = () => {
+    if (searchQuery.trim()) {
+      const [firstName, lastName] = searchQuery.trim().split(' ');
+      dispatch(searchUsers({ firstName, lastName }));
     } else {
-      dispatch(searchUsers('')); // Ja teksts ir tukšs, noņemam iepriekšējos meklēšanas rezultātus
+      dispatch(resetSearch());
     }
   };
 
@@ -107,21 +110,32 @@ const Profile = () => {
     <div className={styles.profileContainer}>
       {/* Search Bar */}
       <div className={styles.searchBar}>
-        <input 
-          type="text" 
-          placeholder="Search users by name or surname..." 
-          value={searchQuery} 
-          onChange={handleSearchChange} 
+        <input
+          type="text"
+          placeholder="Search by first and last name..."
+          value={searchQuery}
+          onChange={handleSearchChange}
         />
+        <button onClick={handleSearchClick}>Search</button>
       </div>
 
       {/* Display Search Results */}
       {searchedUsers && searchedUsers.length > 0 && (
         <div className={styles.searchResults}>
-          <h3>Search Results:</h3>
           <ul>
             {searchedUsers.map((user) => (
-              <li key={user.id}>{user.firstName} {user.lastName}</li>
+              <li key={user.id} className={styles.profileItem}>
+                <div className={styles.guestProfilePictureContainer}>
+                  <img
+                    src={user.picture || 'https://cdn-icons-png.flaticon.com/512/63/63699.png'}
+                    alt={`${user.firstName} ${user.lastName}`}
+                    className={styles.guestProfilePicture}
+                  />
+                </div>
+                <div className={styles.profileName}>
+                  {user.firstName} {user.lastName}
+                </div>
+              </li>
             ))}
           </ul>
         </div>
@@ -130,11 +144,21 @@ const Profile = () => {
       {/* Profile View or Edit */}
       {!isEditing ? (
         <div className={styles.profileView}>
-          <img 
-            src={selectedPicture || 'https://default-image-url.com'} 
-            alt="Profile" 
-            className={styles.profilePicture} 
-          />
+          <div className={styles.profilePictureContainer}>
+            {selectedPicture ? (
+              <img
+                src={selectedPicture}
+                alt="Profile"
+                className={styles.profilePicture}
+              />
+            ) : (
+              <img
+                src='https://cdn-icons-png.flaticon.com/512/63/63699.png'
+                alt="Default silhouette"
+                className={styles.profilePicture}
+              />
+            )}
+          </div>
           <div className={styles.profileDetails}>
             <h2>{data.firstName} {data.lastName}</h2>
             <p><strong>Birth Date:</strong> {formattedBirthDate}</p>
@@ -154,12 +178,12 @@ const Profile = () => {
             <label htmlFor="lastName">Last Name:</label>
             <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} />
             <label htmlFor="birthDate"><strong>Birth Date:</strong></label>
-            <input 
-              type="date" 
-              id="birthDate" 
-              name="birthDate" 
-              value={formData.birthDate ? new Date(formData.birthDate).toISOString().split('T')[0] : ''} 
-              onChange={handleChange} 
+            <input
+              type="date"
+              id="birthDate"
+              name="birthDate"
+              value={formData.birthDate ? new Date(formData.birthDate).toISOString().split('T')[0] : ''}
+              onChange={handleChange}
             />
             <label htmlFor="email"><strong>Email:</strong></label>
             <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />

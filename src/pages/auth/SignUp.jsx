@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./styles.module.css"; // Import CSS module for SignUpForm
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faGooglePlusG, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"; // Import specific icons
+import { faFacebookF, faGooglePlusG, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"; 
+// Import specific icons
 
 function SignUpForm() {
   const [state, setState] = React.useState({

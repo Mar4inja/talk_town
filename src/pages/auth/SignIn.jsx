@@ -137,7 +137,7 @@ function SignInForm() {
         {/* Forgot password button */}
         <button
           type="button"
-          className={styles["forgot-password-btn"]}
+          className={styles.forgotPasswordBtn}
           onClick={() => alert("Password recovery functionality goes here")}
         >
           Forgot your password?

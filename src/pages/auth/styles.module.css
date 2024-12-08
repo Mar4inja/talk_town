@@ -403,15 +403,13 @@ footer a {
     margin-top: -40px; /* Add margin for spacing */
   }
 
-  /* Social container positioning */
   .social-container-signUp,
   .social-container-signIn {
     position: relative;
-    top: auto; /* Remove top positioning */
-    margin-top: 20px; /* Add margin for spacing */
+    top: auto;
+    margin-top: 20px; 
   }
 
-  /* Adjust input fields */
   input {
     width: 100%;
   }

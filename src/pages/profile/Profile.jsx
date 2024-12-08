@@ -1,196 +1,109 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProfileData, updateProfileData, toggleEditMode, searchUsers, resetSearch } from '../../features/profile/profileSlice';
-import styles from './profile.module.css';
-import { jwtDecode } from 'jwt-decode'; // Correct named import
+import React, { useEffect, useState } from "react";
+import styles from "./profile.module.css"; // Importējam CSS moduļus
+import profilePic from "../../images/new/WhatsApp Image 2024-10-31 at 15.17.05_1ae7487b.jpg";
+import profileIcon from "../../images/new/account_circle_24dp_000000_FILL0_wght400_GRAD0_opsz24.png";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserData } from "../../features/profile/profileSlice";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { data, status, error, isEditing, searchedUsers } = useSelector((state) => state.profile);
-  const [selectedPicture, setSelectedPicture] = useState(null);
-  const [decodedBirthDate, setDecodedBirthDate] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const token = localStorage.getItem('accessToken');
+  const profile = useSelector((state) => state.profile);
+  const [activeTab, setActiveTab] = useState("profile");
 
   useEffect(() => {
-    if (token) {
-      try {
-        const decoded = jwtDecode(token); // Correct usage of jwtDecode
-        setDecodedBirthDate(decoded.birthDate);
-      } catch (error) {
-        console.error("Error decoding the token:", error);
-      }
-    }
-  }, [token]);
-
-  useEffect(() => {
-    dispatch(fetchProfileData());
-    // Reset search results on page refresh
-    dispatch(resetSearch());
+    dispatch(fetchUserData());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (data.picture) {
-      setSelectedPicture(data.picture);
-      localStorage.setItem('profilePicture', data.picture);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    const savedPicture = localStorage.getItem('profilePicture');
-    if (savedPicture) {
-      setSelectedPicture(savedPicture);
-    }
-  }, []);
-
-  const [formData, setFormData] = useState({
-    firstName: data.firstName,
-    lastName: data.lastName,
-    birthDate: data.birthDate,
-    email: data.email,
-  });
-
-  const handleEditToggle = () => {
-    dispatch(toggleEditMode());
+  const handleTabClick = (tab) => {
+    // Atjauninām aktīvo cilni
+    setActiveTab(tab);
   };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handlePictureChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const newPicture = reader.result;
-      setSelectedPicture(newPicture);
-      localStorage.setItem('profilePicture', newPicture);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleSave = () => {
-    const updatedData = { ...formData, picture: selectedPicture };
-    dispatch(updateProfileData(updatedData));
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSearchClick = () => {
-    if (searchQuery.trim()) {
-      const [firstName, lastName] = searchQuery.trim().split(' ');
-      dispatch(searchUsers({ firstName, lastName }));
-    } else {
-      dispatch(resetSearch());
-    }
-  };
-
-  if (status === 'loading') {
-    return <div>Loading...</div>;
-  }
-
-  if (status === 'failed') {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!data) {
-    return <div>No profile data available</div>;
-  }
-
-  const formattedBirthDate = decodedBirthDate ? new Date(decodedBirthDate).toLocaleDateString() : data.birthDate ? new Date(data.birthDate).toLocaleDateString() : 'Birthdate not provided';
 
   return (
     <div className={styles.profileContainer}>
-      {/* Search Bar */}
-      <div className={styles.searchBar}>
-        <input
-          type="text"
-          placeholder="Search by first and last name..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
-        <button onClick={handleSearchClick}>Search</button>
+      {/* Sidebar */}
+      <div className={styles.sidebar}>
+        <h2>Account</h2>
+        <ul>
+          <li
+            className={activeTab === "profile" ? styles.active : ""}
+            onClick={() => handleTabClick("profile")}
+          >
+            <img
+              src={profileIcon}
+              alt="Profile Icon"
+              className={styles.profileIcon}
+            />
+            Profile
+          </li>
+          <li
+            className={activeTab === "security" ? styles.active : ""}
+            onClick={() => handleTabClick("security")}
+          >
+            Security
+          </li>
+        </ul>
+        <footer>Secured by Martins</footer>
       </div>
 
-      {/* Display Search Results */}
-      {searchedUsers && searchedUsers.length > 0 && (
-        <div className={styles.searchResults}>
-          <ul>
-            {searchedUsers.map((user) => (
-              <li key={user.id} className={styles.profileItem}>
-                <div className={styles.guestProfilePictureContainer}>
-                  <img
-                    src={user.picture || 'https://cdn-icons-png.flaticon.com/512/63/63699.png'}
-                    alt={`${user.firstName} ${user.lastName}`}
-                    className={styles.guestProfilePicture}
-                  />
-                </div>
-                <div className={styles.profileName}>
-                  {user.firstName} {user.lastName}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* Profile View or Edit */}
-      {!isEditing ? (
-        <div className={styles.profileView}>
-          <div className={styles.profilePictureContainer}>
-            {selectedPicture ? (
-              <img
-                src={selectedPicture}
-                alt="Profile"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <img
-                src='https://cdn-icons-png.flaticon.com/512/63/63699.png'
-                alt="Default silhouette"
-                className={styles.profilePicture}
-              />
-            )}
+      {/* Main Content */}
+      <div className={styles.content}>
+        {activeTab === "profile" && (
+          <div className={styles.tabContent}>
+            <h3 className={styles.profileDetailsHeading}>Profile details</h3>
+            <div className={styles.sectionProfile}>
+              <div className={styles.profileRow}>
+                <h5>Profile</h5>
+                <img
+                  src={styles.profilePic} // Izmantojiet profila attēlu
+                  alt="Profile"
+                  className={styles.profilePic}
+                />
+                <h4>{profile.name}</h4>
+                <button>Edit profile</button>
+              </div>
+            </div>
+            <div className={styles.sectionBirthDate}>
+              <div className={styles.birthDateRow}>
+                <h5>Birth date</h5>
+                <p>{profile.birthDate}</p>
+                <button>Change Birth-Date</button>
+              </div>
+            </div>
+            <div className={styles.sectionEmail}>
+              <div className={styles.emailRow}>
+                <h5>Email addresses</h5>
+                <p>
+                  {profile.email} <span className={styles.tag}>Primary</span>
+                </p>
+                <button>Add email address</button>
+              </div>
+            </div>
+            <div className={styles.sectionPhoneNumber}>
+              <div className={styles.phoneNumberRow}>
+                <h5>Phone number</h5>
+                <p>
+                  {profile.phoneNumber} <span className={styles.tag}>Primary</span>
+                </p>
+                <button>Add phone number</button>
+              </div>
+            </div>
+            <div className={styles.sectionConnectedAccounts}>
+              <div className={styles.connectedAccountsRow}>
+                <h5>Connected accounts</h5>
+                <p>Google • {profile.email}</p>
+                <button>Connect account</button>
+              </div>
+            </div>
           </div>
-          <div className={styles.profileDetails}>
-            <h2>{data.firstName} {data.lastName}</h2>
-            <p><strong>Birth Date:</strong> {formattedBirthDate}</p>
-            <p><strong>Email:</strong> {data.email}</p>
+        )}
+        {activeTab === "security" && (
+          <div className={styles.tabContent}>
+            <h3>Security Settings</h3>
+            <p>Security settings content goes here...</p>
           </div>
-          <button onClick={handleEditToggle}>Edit Profile</button>
-        </div>
-      ) : (
-        <div className={styles.editProfile}>
-          <div className={styles.editPicture}>
-            <label htmlFor="picture">Change Picture:</label>
-            <input type="file" id="picture" name="picture" onChange={handlePictureChange} />
-          </div>
-          <div className={styles.editDetails}>
-            <label htmlFor="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} />
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} />
-            <label htmlFor="birthDate"><strong>Birth Date:</strong></label>
-            <input
-              type="date"
-              id="birthDate"
-              name="birthDate"
-              value={formData.birthDate ? new Date(formData.birthDate).toISOString().split('T')[0] : ''}
-              onChange={handleChange}
-            />
-            <label htmlFor="email"><strong>Email:</strong></label>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-          </div>
-          <button onClick={handleSave}>Save</button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

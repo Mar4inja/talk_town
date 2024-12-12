@@ -1,7 +1,6 @@
 /* Galvenā header stils */
 .header {
     padding: 10px 20px; /* Augšējais un apakšējais ielāde */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Viegls ēnojums */
     position: fixed; /* Fiksēts pozīcija */
     top: 0; /* Attālums no augšas */
     left: 0; /* Attālums no kreisās puses */
@@ -29,6 +28,7 @@
     display: flex; /* Iestatām flexbox */
     justify-content: center; /* Horizontāli centrē visas pogas */
     align-items: center; /* Vertikāli izlīdzina */
+
 }
 
 /* Logotipa stils */
@@ -53,14 +53,28 @@
     align-items: center; /* Vertikāli centrēts */
 }
 
-/* Universāla stils visām saitēm */
-.linkButton {
-    padding: 10px 15px; /* Ielāde ap saitēm */
-    text-decoration: none; /* Noņem zemsvītras */
-    border-radius: 5px; /* Noapaļo stūrus */
-    color: white; /* Balta teksta krāsa */
-    transition: background-color 0.3s; /* Pārejas efekts */
-    text-align: center; /* Centrē tekstu pogās */
+/* Glassmorphic button style */
+.glassmorphic-button {
+    background: rgba(255, 255, 255, 0.1); /* Slightly translucent background */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border with slight translucency */
+    border-radius: 0.9rem; /* Rounded corners */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    color: #100f0f; /* Text color */
+    padding: 10px 20px; /* Padding for the button */
+    transition: all 0.3s ease; /* Correctly combines all transition properties */
+}
+
+.glassmorphic-button:hover {
+    background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
+}
+
+/* Applying the glassmorphic style to all relevant buttons */
+.homeButton,
+.loginButton,
+.logoutButton,
+.profileButton {
+    composes: glassmorphic-button;
 }
 
 /* Pārejas efekts uz saitēm */

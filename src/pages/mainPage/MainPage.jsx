@@ -1,77 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux"; // Importē Redux hookus
-import styles from "../mainPage/mainPage.module.css"; // Importē stilu failu
-import slide1 from "../../images/chatIdeas/robotic-arm-motion-futuristic-technology-innovation-generated-by-ai.jpg";
-import slide2 from "../../images/chatIdeas/education-day-scene-fantasy-style-aesthetic.jpg";
-import slide3 from "../../images/chatIdeas/futuristic.jpg";
+import React from "react";
+import styles from "./mainPage.module.css";
+import phone from "../../images/phone.png";
 
 
-import {
-  setTitle,
-  setDescription,
-} from "../../features/mainPage/mainPageSlice"; // Importē Redux darbības nosaukuma un apraksta iestatīšanai
-
-// Masīvs ar slīdu attēliem
-const slides = [slide1, slide2, slide3];
-
-const MainPage = () => {
-  const dispatch = useDispatch(); // Izveido dispečeri darbību veikšanai
-  const title = useSelector((state) => state.mainPage.title); // Izmanto Redux, lai saņemtu nosaukumu no stāvokļa
-  const description = useSelector((state) => state.mainPage.description); // Izmanto Redux, lai saņemtu aprakstu no stāvokļa
-  const [slideIndex, setSlideIndex] = useState(0); // Stāvoklis pašreizējā slīda indeksam
-
-  useEffect(() => {
-    // Montāžas laikā iestata sākotnējo nosaukumu un aprakstu
-    dispatch(
-      setTitle("Discover New Connections: Your Gateway to Global Friendships!")
-    ); // Maina nosaukumu
-    dispatch(
-      setDescription(
-        "TalkTown is a social communication platform designed to provide a simple and secure way to meet new people and initiate conversations with individuals from around the world..."
-      )
-    ); // Maina aprakstu
-
-    // Slīdņu animācijas intervāls (4 sekundes)
-    const interval = setInterval(() => {
-      setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length); // Cikli slīdu pārslēgšanai
-    }, 4000);
-
-    return () => clearInterval(interval); // Atceļ intervālu, kad komponents tiek noņemts no DOM
-  }, [dispatch]); // Reaģē uz dispečeri kā atkarību
-
+function MainPage() {
   return (
-    <div className={styles.heroWrapper}>
-     
-      <div className={styles.heroSection}>
-        <div className={styles.hero}>
-          <h2>{title}</h2> {/* Nosaukums no Redux */}
-          <p>{description}</p> {/* Apraksts no Redux */}
-          <div className={styles.buttons}>
-            <a href="/join" className={`${styles.join} ${styles.button}`}>
-              Join Us
-            </a>
-            <a href="/learn" className={styles.learn}>
-              Learn More
-            </a>
-          </div>
-        </div>
+    <div className={styles.App}>
 
-        {/* Attēlu slīdnis */}
-        <div className={styles.imgSlider}>
-          {slides.map((slide, index) => (
-            <img
-              key={index}
-              src={slide}
-              alt={`Slide ${index + 1}`}
-              className={`${styles.slide} ${
-                index === slideIndex ? styles.active : ""
-              }`} // Aktīvajam slīdam pievieno "active" klasi
-            />
-          ))}
-        </div>
-      </div>
+      <main>
+        <section className={styles.mainSection}>
+          <h1>AWESOME APNEW MOBILE APP</h1>
+          <div className={styles.buttons}>
+            <button className={styles.downloadBtn}>DOWNLOAD</button>
+            <button className={styles.learnMoreBtn}>LEARN MORE</button>
+          </div>
+          <img src={phone} alt="APNEW Mobile App" className={styles.phoneImage} />
+        </section>
+        <section className={styles.featuresSection}>
+          <div className={styles.feature}>
+            <img src="ios-icon.png" alt="iOS" />
+            <p>iOS 102K</p>
+          </div>
+          <div className={styles.feature}>
+            <img src="android-icon.png" alt="Android" />
+            <p>Android 102K</p>
+          </div>
+        </section>
+        <section className={styles.aboutSection}>
+          <h2>ABOUT APNEW</h2>
+          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+        </section>
+        <section className={styles.bestAppSection}>
+          <h2>BEST MOBILE APP</h2>
+          <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
+          <div className={styles.buttons}>
+            <button className={styles.downloadBtn}>DOWNLOAD</button>
+            <button className={styles.learnMoreBtn}>LEARN MORE</button>
+          </div>
+          <img src="phones-image.png" alt="APNEW Mobile App" className={styles.phonesImage} />
+        </section>
+        <section className={styles.additionalFeaturesSection}>
+          <div className={styles.additionalFeature}>
+            <img src="customize-icon.png" alt="Easy To Customize" />
+            <h3>Easy To Customize</h3>
+            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+          </div>
+          <div className={styles.additionalFeature}>
+            <img src="user-friendly-icon.png" alt="User Friendly" />
+            <h3>User Friendly</h3>
+            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+          </div>
+        </section>
+      </main>
     </div>
   );
-};
+}
 
 export default MainPage;

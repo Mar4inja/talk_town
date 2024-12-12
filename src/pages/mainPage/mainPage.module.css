@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
-/* Global settings */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,134 +7,154 @@
 }
 
 body {
-  height: 100vh;
-  background: url("../../images/green-abstract-background.jpg"); 
+  font-family: 'Open Sans', sans-serif;
+  background: url('../../images/green-abstract-background.jpg') no-repeat center center fixed;
   background-size: cover;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+.AppHeader {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-  color: white; /* Teksta krāsa balta, lai būtu kontrasts uz zaļā fona */
-}
-
-/* Hero Wrapper */
-.heroWrapper {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
+  position: fixed;
   width: 100%;
-  height: 100%;
-  padding: 100px;
-  z-index: 1;
+  top: 0;
+  z-index: 1000;
 }
 
-/* Hero Section */
-.heroSection {
-  flex: 1;
+.AppHeader .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
   display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  padding: 150px 20px 20px;
-  max-width: 1200px;
-  width: 100%;
-  margin: 4% auto;
-  color: #fff;
+  gap: 15px;
 }
 
-/* Hero Text */
-.hero {
-  max-width: 50%;
+nav a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
-.hero h2 {
+nav a:hover {
+  color: #47b2e4;
+}
+
+.mainSection {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mainSection h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  backdrop-filter: blur(16px) saturate(120%);
 }
 
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  backdrop-filter: blur(16px) saturate(120%);
-  padding: 10px;
-}
-
-/* Image Slider */
-.imgSlider {
-  position: relative;
-  width: 400px;
-  height: 350px;
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.5);
-}
-
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.slide.active {
-  opacity: 1;
-}
-
-/* Buttons */
 .buttons {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
-.buttons a {
-  text-decoration: none;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  transition: 0.2s ease;
-  display: inline-block;
+.buttons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.buttons a:not(:last-child) {
-  margin-right: 15px;
-}
-
-.join {
+.downloadBtn {
   background-color: #47b2e4;
+  color: white;
 }
 
-.buttons .learn {
-  border: 1px solid #fff;
-  border-radius: 0.375rem;
+.learnMoreBtn {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
 }
 
-.buttons a:hover {
-  background-color: #47b2e4;
+.buttons button:hover {
+  background-color: #36a1d2;
 }
 
-/* Responsive Styles for Devices under 730px */
-@media screen and (max-width: 730px) {
-  .heroWrapper {
+.phoneImage {
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+}
+
+.featuresSection {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 50px 20px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.featuresSection .feature {
+  text-align: center;
+}
+
+.featuresSection .feature img {
+  max-width: 100%;
+  height: auto;
+}
+
+.aboutSection {
+  padding: 50px 20px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.bestAppSection {
+  padding: 50px 20px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.bestAppSection .buttons {
+  margin-top: 20px;
+}
+
+.bestAppSection .phonesImage {
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+}
+
+.additionalFeaturesSection {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 50px 20px;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.additionalFeature {
+  text-align: center;
+}
+
+.additionalFeature img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .featuresSection, .additionalFeaturesSection {
     flex-direction: column;
     align-items: center;
-  }
-  .imgSlider {
-    width: 100%;
-    height: auto;
-  }
-}
-
-/* Responsive Styles for Tablets under 1023px */
-@media screen and (max-width: 1023px) {
-  .hero {
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .imgSlider {
-    display: block;
   }
 }

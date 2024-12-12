@@ -13,10 +13,6 @@ const Navbar = () => {
   // Iegūstam isAuthenticated no Redux stāvokļa
   const isAuthenticated = useSelector(state => state.login.isLoggedIn);
 
-  useEffect(() => {
-    // Šī daļa tagad nav nepieciešama, jo mēs iegūstam autentifikācijas statusu no Redux
-  }, [isAuthenticated]);
-
   const toggleMenu = () => {
     setIsMenuOpen(prevState => !prevState); // Pārslēdz izvēlnes stāvokli
   };
@@ -37,7 +33,7 @@ const Navbar = () => {
     <header className={styles.header}>
       <nav className={styles.navbar}>
         <h2 className={styles.logo}>
-          <Link to="/">
+          <Link to="/" className={styles.homeButton}>
             <img src={logo} alt="TalkTown Logo" />
           </Link>
         </h2>
@@ -51,18 +47,22 @@ const Navbar = () => {
           </svg>
         </label>
         <ul className={`${styles.links} ${isMenuOpen ? styles.active : ''}`}>
-          <li><Link to="/mainPage" className={styles.linkButton}>Home</Link></li>
-         
+          <li>
+            <Link to="/mainPage" className={styles.homeButton} id="home-button">Home</Link>
+          </li>
+          
           {/* Profile poga tiek parādīta tikai tad, ja lietotājs ir ielogojies */}
           {isAuthenticated && (
-            <li><Link to="/profile" className={styles.linkButton}>Profile</Link></li>
+            <li>
+              <Link to="/profile" className={styles.profileButton} id="profile-button">Profile</Link>
+            </li>
           )}
 
           {!isAuthenticated ? (
             <>
               {/* Login/Register poga tiek parādīta tikai tad, ja lietotājs nav ielogojies */}
               <li>
-                <Link to="/login" className={styles.linkButton} id="login-button">
+                <Link to="/login" className={styles.loginButton} id="login-button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 10H3M10 15l5-5-5-5" />
                   </svg>
@@ -77,7 +77,7 @@ const Navbar = () => {
                 <Link 
                   to="/logout" 
                   onClick={handleLogout} 
-                  className={styles.linkButton} 
+                  className={styles.logoutButton} 
                   id="logout-button"
                 >
                   Logout

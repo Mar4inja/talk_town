@@ -1,0 +1,186 @@
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.profile-container {
+  display: flex;
+  height: 100vh;
+  width: 202vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(0, 0, 0, 0.153);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.153);
+  border-top: 2px solid rgba(0, 0, 0, 0.153);
+  border-radius: 0.5rem 0 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar li img.icon {
+  width: 20px; /* Ikonas platums */
+  height: 20px; /* Ikonas augstums */
+  margin-right: 10px; /* Atstarpe starp ikonu un tekstu */
+  vertical-align: middle; /* Centrē ar tekstu vertikāli */
+  
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: left;
+  
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+  background: #e6f0ff;
+  font-size: 1.2rem;
+  color: #0056b3;
+}
+
+.sidebar footer {
+  margin-top: auto;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Content Styling */
+.content {
+  flex: 1;
+  background: #fae208;
+  border: 2px solid rgba(0, 0, 0, 0.153);
+  border-radius: 0.5rem;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.tab-content {
+  margin-top: 14rem;
+}
+
+.tab-content h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.153); /* Line under the heading */
+  padding-bottom: 10px; /* Optional */
+}
+
+.profile-row,
+.email-row,
+.phone-number-row,
+.birthDate-row,
+.connected-accounts-row {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Adjust gap as needed */
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.profile-row {
+  gap: 20rem;
+}
+
+.profile-pic-container {
+  width: 4rem; /* Fiksēts konteineris attēlam */
+  height: 4rem; /* Fiksēts konteineris augstums */
+  border-radius: 50%; /* Padarām konteineru apļveida */
+  overflow: hidden; /* Paslēpj daļu, ja bilde pārsniedz konteineru */
+  border: 2px solid rgb(197, 201, 192);
+}
+
+.profile-pic {
+  width: 100%; /* Bilde aizpilda visu konteineru platumu */
+  height: 100%; /* Bilde aizpilda visu konteineru augstumu */
+  object-fit: cover; /* Saglabā attēla proporcijas, apgriežot lieko */
+}
+
+.section_profile h5,
+.section_email h5,
+.section_phone_number h5,
+.section_birthDate h5,
+.section_connected_accounts h5 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.section_profile h4 {
+  font-size: 1rem;
+  margin-left: -19rem;
+  font-weight: 100;
+}
+
+.section_profile,
+.section_email,
+.section_phone_number,
+.section_birthDate,
+.section_connected_accounts {
+  padding-top: 1rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.153); /* Line between sections */
+  padding-bottom: 0.1rem; /* Optional */
+  width: 50%;
+}
+
+.section_profile button,
+.section_email button,
+.section_phone_number button,
+.section_birthDate button,
+.section_connected_accounts button {
+  background: #12b300;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px; /* Fiksēts pogas platums */
+}
+
+.section_profile button:hover,
+.section_email button:hover,
+.section_birthDate button:hover,
+.section_phone_number button:hover,
+.section_connected_accounts button:hover {
+  background: #003d80;
+}
+
+.email-row p,
+.phone-number-row p,
+.section_birthDate p,
+.connected-accounts-row p {
+  flex-grow: 1;
+  text-align: center;
+  padding: 0.5rem;
+  width: 300px; /* Set a fixed width for paragraphs */
+}
+
+.tag {
+  background: #e6f0ff;
+  color: #0056b3;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 3px;
+}

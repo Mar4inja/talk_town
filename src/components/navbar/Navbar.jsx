@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styles from './navbar.module.css'; // Importējam CSS moduli
+import styles from "./navbar.module.css"; // Importējam CSS moduli
 import logo from "../../images/logo/9.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/auth/loginSlice"; // Importējam logout funkciju
@@ -11,10 +11,10 @@ const Navbar = () => {
   const navigate = useNavigate(); // Izmantojam navigate, lai novirzītu lietotāju pēc logout
 
   // Iegūstam isAuthenticated no Redux stāvokļa
-  const isAuthenticated = useSelector(state => state.login.isLoggedIn);
+  const isAuthenticated = useSelector((state) => state.login.isLoggedIn);
 
   const toggleMenu = () => {
-    setIsMenuOpen(prevState => !prevState); // Pārslēdz izvēlnes stāvokli
+    setIsMenuOpen((prevState) => !prevState); // Pārslēdz izvēlnes stāvokli
   };
 
   const handleLogout = () => {
@@ -22,8 +22,8 @@ const Navbar = () => {
     dispatch(logout());
 
     // Izdzēšam tokenus no localStorage
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
 
     // Novirzām lietotāju uz login lapu pēc logout
     navigate("/login");
@@ -37,24 +37,42 @@ const Navbar = () => {
             <img src={logo} alt="TalkTown Logo" />
           </Link>
         </h2>
-        <label 
-          htmlFor="menu-toggle" 
-          className={styles.hamburgerBtn} 
+        <label
+          htmlFor="menu-toggle"
+          className={styles.hamburgerBtn}
           onClick={toggleMenu}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          >
+            <path
+              d="M3 12h18M3 6h18M3 18h18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
           </svg>
         </label>
-        <ul className={`${styles.links} ${isMenuOpen ? styles.active : ''}`}>
+        <ul className={`${styles.links} ${isMenuOpen ? styles.active : ""}`}>
           <li>
-            <Link to="/mainPage" className={styles.homeButton} id="home-button">Home</Link>
+            <Link to="/landingPage" className={styles.homeButton} id="home-button">
+              Home
+            </Link>
           </li>
-          
+
           {/* Profile poga tiek parādīta tikai tad, ja lietotājs ir ielogojies */}
           {isAuthenticated && (
             <li>
-              <Link to="/profile" className={styles.profileButton} id="profile-button">Profile</Link>
+              <Link
+                to="/profile"
+                className={styles.profileButton}
+                id="profile-button"
+              >
+                Profile
+              </Link>
             </li>
           )}
 
@@ -62,8 +80,22 @@ const Navbar = () => {
             <>
               {/* Login/Register poga tiek parādīta tikai tad, ja lietotājs nav ielogojies */}
               <li>
-                <Link to="/login" className={styles.loginButton} id="login-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <Link
+                  to="/login"
+                  className={styles.loginButton}
+                  id="login-button"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M15 10H3M10 15l5-5-5-5" />
                   </svg>
                   Login/Register
@@ -74,10 +106,10 @@ const Navbar = () => {
             <>
               {/* Logout kā linka poga */}
               <li>
-                <Link 
-                  to="/logout" 
-                  onClick={handleLogout} 
-                  className={styles.logoutButton} 
+                <Link
+                  to="/logout"
+                  onClick={handleLogout}
+                  className={styles.logoutButton}
                   id="logout-button"
                 >
                   Logout

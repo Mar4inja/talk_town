@@ -1,0 +1,449 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap");
+
+* {
+  font-family: "Roboto Slab", serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: beige;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh; /* Ensure main container takes at least full viewport height */
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.upperSquare {
+  width: 100vw;
+  height: 60vh;
+  background-color: #003366e1;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30vh), 0 100%);
+}
+
+.landingPageImageContainer {
+  text-align: center;
+  margin-top: 20px;
+  z-index: 1;
+}
+
+.landingPageImage {
+  position: absolute;
+  width: 40vw;
+  height: auto;
+  top: 6vh;
+  left: 150vh;
+  transform: translateX(-50%);
+}
+
+.phonesImage {
+  position: absolute;
+  width: 20vw;
+  height: auto;
+  top: 72vh;
+  left: 42%;
+  transform: translateX(-50%);
+}
+
+.textContainer {
+  position: absolute;
+  top: 20vh;
+  left: 90vh;
+  width: 60vh;
+  max-width: 90%;
+  transform: translateX(-50%);
+  margin: 1.5rem;
+  z-index: 2;
+}
+
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  line-height: 1.2; /* Pievieno line-height, lai uzlabotu lasāmību */
+  font-weight: bold; /* Uzlabo izskatu un padara tekstu izteiksmīgāku */
+}
+
+p {
+  
+  font-size: 1rem;
+  color: #e6e8dc;
+  line-height: 1.5; /* Lielāks line-height, lai teksts būtu vieglāk lasāms */
+}
+
+
+.welcome {
+  position: relative;
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.talkTown {
+  position: relative;
+  font-size: 2.5rem;
+  color: #ff6600; 
+}
+
+
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.button {
+  position: relative;
+  margin-bottom: 220vh;
+  font-size: 1rem;
+  padding: 0.8rem 1.2rem;
+  background-color: #2a9811d0;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+ 
+}
+
+.button:hover {
+  background-color: #35c714d0;
+}
+
+.secondTextContainer {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  text-align: center;
+  width: 40%;
+  max-width: 90%;
+  transform: translateX(-50%);
+  margin: 20px;
+  z-index: 2;
+}
+
+.about,
+.future {
+  font-size: 2rem;
+  position: relative;
+  color: #000000;
+}
+
+.our {
+  font-size: 2.5rem;
+  position: relative;
+  color: #ff6600;
+}
+
+.secondTextContainer p {
+  font-size: 1rem;
+  color: black;
+}
+
+.circleContainer {
+  width: 100%;
+  position: relative;
+  margin-top: -100vh;
+}
+
+.circleOne,
+.circleTwo,
+.circleThree {
+  position: absolute;
+  background-color: rgb(92, 140, 71);
+  border-radius: 50%;
+  border: 5px solid rgb(252, 252, 252);
+  width: 50px;
+  height: 50px;
+}
+
+.circleOne {
+  top: -50px;
+  left: 30%;
+}
+
+.circleTwo {
+  top: -80px;
+  left: 40%;
+}
+
+.circleThree {
+  top: -110px;
+  left: 50%;
+}
+
+.thirdTextContainer {
+  position: absolute;
+  top: 80%;
+  left: 63%;
+  transform: translateX(-50%);
+  text-align: start;
+  width: 20%;
+  max-width: 90%;
+  margin-top: 50px;
+  z-index: 2;
+}
+
+.this,
+.look {
+  position: relative;
+  font-size: 2rem;
+  color: #000000;
+}
+
+.will {
+  font-size: 2.5rem;
+  position: relative;
+  color: #ff6600;
+}
+
+.thirdTextContainer h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.thirdTextContainer p {
+  font-size: 1rem;
+  color: black;
+}
+
+.turnOnButton {
+  font-size: 1rem;
+  margin-top: 45vh;
+  left: 80vh;
+  padding: 0.8rem 1.4rem;
+  background-color: rgb(92, 140, 71);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.turnOnButton:hover {
+  background-color: #35c714d0;
+}
+
+.footerContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+}
+
+.footerContainer .deformedSquaresContainer {
+  position: absolute;
+  top: 55vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footerContainer .deformedSquaresContainer .square1,
+.footerContainer .deformedSquaresContainer .square2,
+.footerContainer .deformedSquaresContainer .square3 {
+  height: 5rem;
+  width: 5rem;
+  background-color: rgb(92, 140, 71);
+  border: 4px solid #fff;
+  border-radius: 30px 30px 0;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.footerContainer .deformedSquaresContainer .square1 {
+  background-image: url("../../images/landingPage/bxs-cog.svg");
+}
+
+.footerContainer .deformedSquaresContainer .square2 {
+  background-image: url("../../images/landingPage/bxs-heart.svg");
+  transform: translateY(-60px);
+}
+
+.footerContainer .deformedSquaresContainer .square3 {
+  background-image: url("../../images//landingPage//bxs-time-five.svg");
+  transform: translateY(-120px);
+}
+
+@media (max-width: 1920px) {
+  .landingPageImage {
+    width: 38vw;
+    margin-left: 25vh;
+  }
+  .phonesImage {
+    width: 25vw;
+    margin-top: -5vh;
+    margin-left: 20vh;
+  }
+  .textContainer {
+    width: 25%;
+    top: 15%;
+    left: 50%;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .button {
+    font-size: 1rem;
+  }
+
+  .secondTextContainer {
+    width: 50%;
+  }
+
+  .thirdTextContainer {
+    width: 40vh;
+    margin-left: 22vh;
+  }
+
+  .buttonContainer {
+    font-size: 0.7rem;
+    margin-bottom: -10vh;
+    margin-left: 20vh;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .landingPageImage {
+    width: 60vw;
+    margin-left: 10vh;
+    margin-top: 10vh;
+  }
+  .phonesImage {
+    width: 40vw;
+    margin-left: -8vh;
+  }
+  .textContainer {
+    width: 30vh;
+    top: 20vh;
+    left: 25vh;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+  .secondTextContainer {
+    width: 60%;
+  }
+  .thirdTextContainer {
+    width: 40%;
+    margin-left: 7vh;
+    margin-top: 0;
+  }
+
+  .buttonContainer {
+    font-size: 0.7rem;
+    margin-bottom: 12vh;
+    margin-left: -11vh;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .turnOnButton {
+    margin-right: -20px;
+  }
+
+  .buttonContainer button:last-child {
+    margin-right: 0; 
+  }
+}
+@media (max-width: 768px) {
+  .landingPageImage {
+    width: 60vw;
+    margin-left: 10%;
+  }
+  .phonesImage {
+    width: 40vw;
+    margin-top: 15vh;
+    margin-left: 12vh;
+  }
+  .textContainer {
+    width: 38vh;
+    top: 5%;
+    left: 26%;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  p {
+    font-size: 0.8rem;
+  }
+  .buttonContainer {
+    font-size: 0.7rem;
+    margin-bottom: -10vh;
+    margin-left: 12vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .buttonContainer button:nth-child(1) {
+    display: none; /* Paslēpj pirmo pogu */
+  }
+
+  .buttonContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .thirdTextContainer {
+    width: 70%;
+    margin-top: -5%;
+  }
+}
+@media (max-width: 480px) {
+  .landingPageImage {
+    display: none;
+  }
+  .phonesImage {
+    width: 50vw;
+    margin-top: 20vh;
+    margin-left: 5vh;
+  }
+  .textContainer {
+    width: 60%;
+    top: 5%;
+    left: 50%;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  p {
+    font-size: 0.7rem;
+  }
+  .buttonContainer {
+    margin-left: 5vh;
+    width: 40vh;
+  }
+  .secondTextContainer {
+    width: 80vh;
+  }
+  .thirdTextContainer {
+    width: 40vh;
+    margin-left: -4vh;
+  }
+}

@@ -1,0 +1,72 @@
+/* Galvenais konteiners */
+.container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: "Arial", sans-serif;
+    color: white;
+    text-align: center;
+    background-color: black; /* Melns fons zvaigžņotajām debesīm */
+  }
+  
+  /* Zvaigžņotās debesis */
+  .starryCanvas {
+    position: absolute; /* Fiksēta pozīcija, lai aizņem visu ekrānu */
+    top: 0;
+    left: 0;
+    width: 100%; /* Pilna platuma */
+    height: 100%; /* Pilns augstums */
+    z-index: 10; /* Zem visa satura */
+  }
+  
+  /* Countdown konteiners */
+  .countdownContainer {
+    position: relative;
+    z-index: 1; /* Virs zvaigžņotajām debesīm */
+    padding-top: 20vh;
+  }
+  
+  /* Virsraksts */
+  .heading {
+    font-size: 3rem;
+    margin-bottom: 20vh;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #f00;
+  }
+  
+  /* Taimeris */
+  .timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 6vh;
+    gap: 6rem; /* Atstarpe starp laika blokiem */
+  }
+  
+  /* Taimeru bloki */
+  .timerBlock {
+    text-align: center;
+    padding: 0 1rem; /* Atstarpe no katra taimeru bloka */
+  }
+  
+  /* Skaitļi */
+  .number {
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #f00;
+  }
+  
+  /* Teksta etiķetes */
+  .label {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+  
+  /* Kolons starp laika vienībām */
+  .colon {
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #f00;
+    margin: 0 5.6rem; /* Atstarpe starp kolonām un citiem elementiem */
+  }
+  

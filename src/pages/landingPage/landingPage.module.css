@@ -284,7 +284,7 @@ p {
 @media (max-width: 1920px) {
   .landingPageImage {
     width: 38vw;
-    margin-left: 25vh;
+    margin-left: 1vh;
   }
   .phonesImage {
     width: 25vw;
@@ -292,9 +292,10 @@ p {
     margin-left: 20vh;
   }
   .textContainer {
-    width: 25%;
-    top: 15%;
-    left: 50%;
+  
+    width: 65vh;
+    top: 15vh;
+    left: 80vh;
   }
   h2 {
     font-size: 2rem;
@@ -318,15 +319,15 @@ p {
   .buttonContainer {
     font-size: 0.7rem;
     margin-bottom: -10vh;
-    margin-left: 20vh;
-    gap: 10px;
+    margin-right: 2vh;
+    gap: 4vh;
   }
 }
 
 @media (max-width: 1024px) {
   .landingPageImage {
-    width: 60vw;
-    margin-left: 10vh;
+    width: 40vw;
+    margin-left: -40vh;
     margin-top: 10vh;
   }
   .phonesImage {
@@ -334,9 +335,9 @@ p {
     margin-left: -8vh;
   }
   .textContainer {
-    width: 30vh;
-    top: 20vh;
-    left: 25vh;
+    width: 80vh;
+    top: 15vh;
+    left: 45vh;
   }
   h2 {
     font-size: 1.8rem;
@@ -349,21 +350,30 @@ p {
   }
   .thirdTextContainer {
     width: 40%;
-    margin-left: 7vh;
+    margin-left: 15vh; /* Убираем смещение вправо */
     margin-top: 0;
+    text-align: left; /* Гарантируем, что текст внутри тоже выровнен влево */
+    display: flex; /* Делаем контейнер гибким */
+    flex-direction: column; /* Располагаем элементы в колонку */
+    align-items: flex-start; /* Выровнять содержимое по левой стороне */
   }
+  
 
   .buttonContainer {
     font-size: 0.7rem;
-    margin-bottom: 12vh;
-    margin-left: -11vh;
+    margin-top: -3vh;
+    margin-left: 17vh;
     display: flex;
     justify-content: flex-start;
   }
 
   .turnOnButton {
-    margin-right: -20px;
+    position: absolute; /* Используем абсолютное позиционирование */
+    top: 70vh; /* Отступ сверху */
+    left: 45%; /* Центрируем элемент по горизонтали */
+    transform: translateX(-50%); /* Сдвигаем элемент влево на половину ширины, чтобы идеально центрировать */
   }
+  
 
   .buttonContainer button:last-child {
     margin-right: 0; 

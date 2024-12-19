@@ -1,106 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap");
+
+* {
+  font-family: "Roboto Slab", serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 .header {
-    padding: 10px 20px; /* Augšējais un apakšējais ielāde */
-    position: fixed; /* Fiksēts pozīcija */
-    top: 0; /* Attālums no augšas */
-    left: 0; /* Attālums no kreisās puses */
-    right: 0; /* Attālums no labās puses */
-    z-index: 1000; /* Z-index, lai pārliecinātos, ka tas ir virs citiem elementiem */
-}
-
-.backdrop {
-    position: fixed; /* Fiksēta pozīcija */
-    top: 0; /* Augšējais attālums */
-    left: 0; /* Kreisais attālums */
-    right: 0; /* Labais attālums */
-    bottom: 0; /* Apakšējais attālums */
-    background: rgba(0, 0, 0, 0.5); /* Tumšs caurspīdīgs fons */
-    backdrop-filter: blur(5px); /* Izplūšana */
-    display: none; /* Sākumā slēpj */
-    z-index: 999; /* Zem navigācijas joslas */
-}
-
-.backdrop.active {
-    display: block; 
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .navbar {
-    display: flex; /* Iestatām flexbox */
-    justify-content: center; /* Horizontāli centrē visas pogas */
-    align-items: center; /* Vertikāli izlīdzina */
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-/* Logotipa stils */
 .logo img {
-    height: 150px; /* Logotipa augstums */
-    margin-right: 100vh; /* Atstāj logotipa vietu, lai pogas būtu centrētas */
+  height: 150px;
 }
 
+.links li a {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(196, 193, 193, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
 
-
-/* Hamburgera pogas stils */
-.hamburgerBtn {
-    color: #f8f8f8;
-    display: none; /* Sākumā slēpj hamburgera pogu */
+.links li a:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .links {
-    list-style: none; /* Noņem saraksta stilu */
-    display: flex; /* Iestatām flexbox */
-    gap: 20px; /* Attālums starp saitēm */
-    align-items: center; /* Vertikāli centrēts */
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
-.linkButton:hover {
-    background-color: #0056b3; /* Tumšāka zila krāsa peldošai */
+.links.active {
+  display: flex;
 }
 
-#menu-toggle {
-    display: none;
+.hamburgerBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-/* Mediju vaicājumi mobilajām ierīcēm */
+/* Jaunā fona krāsa, kad izvēlne tiek atvērta */
 @media (max-width: 768px) {
-    /* Hamburgera pogas rādīšana mobilajā versijā */
-    .hamburgerBtn {
-        display: block; /* Rāda hamburgera pogu, kad ekrāns ir mazāks par 768px */
-    }
+  .hamburgerBtn {
+    display: block;
+  }
 
-    .links {
-        display: none; /* Sākumā slēpj saites */
-        flex-direction: column; /* Izlīdzina vertikāli */
-        background-color: #f8f8f8; /* Fons sarakstam */
-        position: absolute; /* Pozicionē sarakstu */
-        top: 60px; /* Attālums no augšas */
-        right: 0; /* Izlīdzina sarakstu labajā pusē */
-        width: 100%; /* Pilna platums */
-        padding: 10px 0; /* Ielāde iekšā */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Viegls ēnojums */
-    }
+  .links {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(31, 24, 24, 0.9); /* Tumšāks pelēks fons */
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.212);
+    border-radius: 0 8vh 8vh 8vh;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Tumsāks ēnojums */
+    transition: background-color 0.3s ease; /* Pāreja uz fona krāsas maiņu */
+  }
 
-    /* Rāda saites, kad hamburgera poga ir aktivizēta */
-    .links.active {
-        display: flex; /* Rāda saites, kad hamburgera poga ir aktivizēta */
-    }
+  .links.active {
+    display: flex;
+  }
 
-    /* Visu saišu un pogu līmeņošana */
-    .links li {
-        display: flex; /* Flexbox izlīdzināšanai */
-        justify-content: center; /* Horizontāla centrēšana */
-        align-items: center; /* Vertikāla centrēšana */
-        padding: 10px 0; /* Ielāde ap saitēm */
-        width: 100%; /* Pilna platums, lai pogas aizņemtu visu rindu */
-    }
+  .links li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+  }
 }
 
-/* Ekrāna izmēram virs 768px */
 @media (min-width: 769px) {
-    .hamburgerBtn {
-        display: none; /* Slēpj hamburgera pogu, kad ekrāns ir lielāks par 768px */
-    }
+  .navbar {
+    padding: 0 50px;
+  }
 
-    .links {
-        display: flex; /* Rāda saites, kad ekrāns ir lielāks par 768px */
-    }
+  .logo img {
+    height: 180px;
+  }
+
+  .links {
+    gap: 40px;
+  }
 }

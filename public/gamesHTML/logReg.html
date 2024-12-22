@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <style>
+        /* Pamata stils */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .hidden {
+            display: none;
+        }
+        #welcomeMessage {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Reģistrācijas un pieteikšanās formas -->
+    <div class="container" id="registerForm">
+        <h2>Register</h2>
+        <input type="text" id="registerName" placeholder="Enter your name" required>
+        <input type="password" id="registerPassword" placeholder="Enter password" required>
+        <button onclick="register()">Register</button>
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+    </div>
+
+    <div class="container hidden" id="loginForm">
+        <h2>Login</h2>
+        <input type="text" id="loginName" placeholder="Enter your name" required>
+        <input type="password" id="loginPassword" placeholder="Enter password" required>
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
+    </div>
+
+    <div class="container hidden" id="welcomeSection">
+        <p id="welcomeMessage"></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        // Funkcija, lai parādītu reģistrācijas formu
+        function showRegister() {
+            document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+        }
+
+        // Funkcija, lai parādītu pieteikšanās formu
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        // Reģistrācija
+        function register() {
+            const name = document.getElementById('registerName').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (name && password) {
+                localStorage.setItem('userName', name);
+                localStorage.setItem('userPassword', password);
+                alert('Registration successful! Please login now.');
+                showLogin();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Pieteikšanās
+        function login() {
+            const name = document.getElementById('loginName').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const storedName = localStorage.getItem('userName');
+            const storedPassword = localStorage.getItem('userPassword');
+
+            if (name === storedName && password === storedPassword) {
+                document.getElementById('welcomeMessage').innerText = `Welcome, ${name}!`;
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('welcomeSection').classList.remove('hidden');
+            } else {
+                alert('Invalid name or password.');
+            }
+        }
+
+        // Iziet no sistēmas
+        function logout() {
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

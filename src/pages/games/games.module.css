@@ -1,0 +1,104 @@
+/* Konteiners visam spēļu komponentam */
+.gamesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Horizontālā un vertikālā izlīdzināšana */
+  min-height: 100vh; /* Nodrošina, ka tas aizņem visu ekrāna augstumu */
+  padding: 20px;
+  width: 100%; /* Nodrošina, ka fons aizņem visu komponentu platumu */
+  box-sizing: border-box; /* Lai pārliecinātos, ka padding nesabojā platumu */
+  background-color: #4caf50; /* Zaļš fons tikai spēļu komponentam */
+}
+
+.gamesGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 kolonnas vienā rindā */
+  gap: 20px; /* Atstarpe starp kartiņām */
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 20vh; /* Nodrošina automātisku pielāgošanos režģim */
+  height: 20vh;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-size: cover; /* Lai attēls aizpilda visu kartiņu */
+  padding: 5vh;
+}
+
+
+/* Hover efekts kartēm */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+.cardTitle {
+  font-size: 1.8rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.cardDescription {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.infoContainer {
+  background-color: #161717b3;
+  border-radius: 2vh;
+  padding: 5px;
+  width: 15vh;
+  max-width: 95%; 
+}
+/* Modālais logs */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 900px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Aizvērt pogas stils */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: #000;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Iframe stils spēļu iekļaušanai */
+.gameFrame {
+  width: 100%;
+  height: 600px;
+  border: none;
+  border-radius: 8px;
+}

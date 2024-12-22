@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игры для детей - Узнай животных</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .game-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        .animal-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .animal-image:hover {
+            transform: scale(1.1);
+        }
+
+        .answers {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .score {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Угадай животное</h1>
+    <p>Нажми на картинку, чтобы угадать животное!</p>
+    <img id="animalImage" class="animal-image" src="https://via.placeholder.com/150" alt="Животное">
+    <div class="answers">
+        <button onclick="checkAnswer('Кошка')">Кошка</button>
+        <button onclick="checkAnswer('Собака')">Собака</button>
+        <button onclick="checkAnswer('Корова')">Корова</button>
+        <button onclick="checkAnswer('Петух')">Петух</button>
+    </div>
+    <p class="message" id="message"></p>
+    <p class="score" id="score">Очки: 0</p>
+</div>
+
+<script>
+    const animals = [
+        { name: 'Кошка', image: 'https://via.placeholder.com/150/0000FF/808080?text=Кошка' },
+        { name: 'Собака', image: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=Собака' },
+        { name: 'Корова', image: 'https://via.placeholder.com/150/FFFF00/FFFFFF?text=Корова' },
+        { name: 'Петух', image: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=Петух' }
+    ];
+
+    let currentAnimalIndex = 0;
+    let score = 0;
+
+    const animalImageElement = document.getElementById('animalImage');
+    const messageElement = document.getElementById('message');
+    const scoreElement = document.getElementById('score');
+
+    function showAnimal() {
+        const currentAnimal = animals[currentAnimalIndex];
+        animalImageElement.src = currentAnimal.image;
+        messageElement.textContent = '';
+    }
+
+    function checkAnswer(selectedAnswer) {
+        const currentAnimal = animals[currentAnimalIndex];
+
+        if (selectedAnswer === currentAnimal.name) {
+            score++;
+            messageElement.textContent = 'Правильно!';
+            messageElement.style.color = 'green';
+        } else {
+            messageElement.textContent = 'Неправильно! Попробуй снова.';
+            messageElement.style.color = 'red';
+        }
+
+        scoreElement.textContent = `Очки: ${score}`;
+
+        // Move to next animal
+        currentAnimalIndex++;
+        if (currentAnimalIndex >= animals.length) {
+            messageElement.textContent = `Игра завершена! Ваши очки: ${score}`;
+            scoreElement.style.display = 'none';
+        } else {
+            setTimeout(showAnimal, 1500);
+        }
+    }
+
+    // Start the game
+    showAnimal();
+</script>
+
+</body>
+</html>

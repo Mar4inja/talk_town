@@ -80,6 +80,11 @@ const Navbar = () => {
               Countdown New Year
             </Link>
           </li>
+          <li>
+            <Link to="/games" className={styles.games}>
+              Games
+            </Link>
+          </li>
           {isAuthenticated && (
             <li>
               <Link to="/profile" className={styles.profileButton}>

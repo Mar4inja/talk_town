@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft 2D</title>
+    <style>
+        /* Galvenā lapa un stils */
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #87CEEB; /* Debesu krāsa */
+        }
+        canvas {
+            display: block;
+            background-color: #6A5ACD; /* Zemes fons */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        // Iegūstam canvas un tā kontekstu
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Spēles parametri
+        const blockSize = 40; // Bloka izmērs
+        const rows = Math.floor(canvas.height / blockSize);
+        const cols = Math.floor(canvas.width / blockSize);
+        const blocks = []; // Bloku masīvs
+
+        // Ielādējam sākotnējo zemi
+        for (let y = 0; y < rows; y++) {
+            blocks[y] = [];
+            for (let x = 0; x < cols; x++) {
+                blocks[y][x] = y > rows / 2 ? "dirt" : null; // Puse zeme, puse gaiss
+            }
+        }
+
+        // Bloku krāsas
+        const blockColors = {
+            dirt: "#8B4513", // Zeme
+            stone: "#808080", // Akmens
+        };
+
+        // Klausāmies peles klikšķus
+        canvas.addEventListener("mousedown", placeOrRemoveBlock);
+
+        function placeOrRemoveBlock(event) {
+            const x = Math.floor(event.clientX / blockSize);
+            const y = Math.floor(event.clientY / blockSize);
+
+            // Labais klikšķis - novāc bloku
+            if (event.button === 2) {
+                blocks[y][x] = null;
+            } 
+            // Kreisais klikšķis - novieto bloku
+            else {
+                blocks[y][x] = "dirt";
+            }
+
+            drawBlocks();
+        }
+
+        // Aizliedz labā klikšķa konteksta izvēlni
+        window.addEventListener("contextmenu", (e) => e.preventDefault());
+
+        // Zīmē visus blokus
+        function drawBlocks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    if (blocks[y][x]) {
+                        ctx.fillStyle = blockColors[blocks[y][x]];
+                        ctx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
+                        ctx.strokeStyle = "#000"; // Kontūras
+                        ctx.strokeRect(x * blockSize, y * blockSize, blockSize, blockSize);
+                    }
+                }
+            }
+        }
+
+        drawBlocks(); // Zīmē sākuma stāvokli
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        /* Galvenā spēles laukuma stils */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        canvas {
+            background-color: #111;
+            border: 2px solid #555;
+            display: block;
+        }
+
+        h1 {
+            position: absolute;
+            top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Snake Game</h1>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <script>
+        // Iegūstam canvas un kontekstu
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Spēles mainīgie
+        const boxSize = 20; // Čūskas un lauka vienības lielums
+        let snake = [{ x: 160, y: 160 }]; // Čūskas sākuma pozīcija
+        let food = { x: 80, y: 80 }; // Ēdiena sākuma pozīcija
+        let dx = boxSize; // Sākotnējais kustības virziens (pa labi)
+        let dy = 0;
+        let score = 0;
+        let gameInterval;
+
+        // Klausāmies bulttaustiņu notikumus
+        document.addEventListener("keydown", changeDirection);
+
+        // Sākam spēli
+        startGame();
+
+        function startGame() {
+            gameInterval = setInterval(updateGame, 100); // 100ms intervāls
+        }
+
+        // Atjaunina spēles stāvokli
+        function updateGame() {
+            moveSnake();
+            if (checkCollision()) {
+                clearInterval(gameInterval); // Beidz spēli
+                alert("Game Over! Tavs rezultāts: " + score);
+                return;
+            }
+
+            if (snake[0].x === food.x && snake[0].y === food.y) {
+                eatFood();
+            } else {
+                snake.pop(); // Noņem pēdējo segmentu, ja ēdienu neapēd
+            }
+
+            drawGame();
+        }
+
+        // Uzzīmē spēles lauku, ēdienu un čūsku
+        function drawGame() {
+            ctx.fillStyle = "#111"; // Notīra spēles laukumu
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Zīmē ēdienu
+            ctx.fillStyle = "red";
+            ctx.fillRect(food.x, food.y, boxSize, boxSize);
+
+            // Zīmē čūsku
+            ctx.fillStyle = "lime";
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x, segment.y, boxSize, boxSize);
+            });
+
+            // Parāda rezultātu
+            ctx.fillStyle = "white";
+            ctx.font = "16px Arial";
+            ctx.fillText("Score: " + score, 10, 20);
+        }
+
+        // Pārvieto čūsku
+        function moveSnake() {
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+            snake.unshift(head); // Pievieno jaunu galvu
+        }
+
+        // Pārbauda sadursmes
+        function checkCollision() {
+            const head = snake[0];
+            // Pārbauda sadursmi ar sienām
+            if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height) {
+                return true;
+            }
+            // Pārbauda sadursmi ar sevi
+            for (let i = 1; i < snake.length; i++) {
+                if (snake[i].x === head.x && snake[i].y === head.y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Ēdiena apēšana
+        function eatFood() {
+            score += 10; // Palielina rezultātu
+            placeFood(); // Novieto ēdienu jaunā vietā
+        }
+
+        // Novieto ēdienu nejaušā vietā
+        function placeFood() {
+            food = {
+                x: Math.floor(Math.random() * (canvas.width / boxSize)) * boxSize,
+                y: Math.floor(Math.random() * (canvas.height / boxSize)) * boxSize
+            };
+
+            // Nodrošina, ka ēdiens nav uz čūskas
+            snake.forEach(segment => {
+                if (segment.x === food.x && segment.y === food.y) {
+                    placeFood(); // Rekursīvi mēģina no jauna
+                }
+            });
+        }
+
+        // Maina čūskas kustības virzienu
+        function changeDirection(event) {
+            const LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
+
+            if (event.keyCode === LEFT && dx === 0) {
+                dx = -boxSize;
+                dy = 0;
+            } else if (event.keyCode === UP && dy === 0) {
+                dx = 0;
+                dy = -boxSize;
+            } else if (event.keyCode === RIGHT && dx === 0) {
+                dx = boxSize;
+                dy = 0;
+            } else if (event.keyCode === DOWN && dy === 0) {
+                dx = 0;
+                dy = boxSize;
+            }
+        }
+    </script>
+</body>
+</html>

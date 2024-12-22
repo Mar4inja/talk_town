@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzles spēle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .game-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .score {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Puzles spēle</h1>
+    <p class="question" id="question">Kāda ir galvaspilsēta Latvijai?</p>
+    <div class="answers">
+        <button onclick="checkAnswer('Rīga')">Rīga</button>
+        <button onclick="checkAnswer('Liepāja')">Liepāja</button>
+        <button onclick="checkAnswer('Jurmala')">Jurmala</button>
+        <button onclick="checkAnswer('Daugavpils')">Daugavpils</button>
+    </div>
+    <p class="message" id="message"></p>
+    <p class="score" id="score">Punkti: 0</p>
+</div>
+
+<script>
+    // Main game logic
+    let score = 0;
+    const questionElement = document.getElementById('question');
+    const messageElement = document.getElementById('message');
+    const scoreElement = document.getElementById('score');
+
+    const questions = [
+        {
+            question: 'Kāda ir galvaspilsēta Latvijai?',
+            correctAnswer: 'Rīga',
+            answers: ['Rīga', 'Liepāja', 'Jurmala', 'Daugavpils']
+        },
+        {
+            question: 'Cik dienas ir nedēļā?',
+            correctAnswer: '7',
+            answers: ['5', '6', '7', '8']
+        },
+        {
+            question: 'Kurā gadā sākās Pirmais pasaules karš?',
+            correctAnswer: '1914',
+            answers: ['1912', '1914', '1918', '1920']
+        },
+        {
+            question: 'Kāds ir lielākais dzīvnieks uz Zemes?',
+            correctAnswer: 'Zilais valis',
+            answers: ['Zilais valis', 'Elephants', 'Lācis', 'Zebras']
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+
+    // Show the next question
+    function showNextQuestion() {
+        if (currentQuestionIndex < questions.length) {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+
+            const buttons = document.querySelectorAll('.answers button');
+            buttons.forEach((button, index) => {
+                button.textContent = currentQuestion.answers[index];
+            });
+
+            messageElement.textContent = '';
+        } else {
+            questionElement.textContent = 'Spēle beigusies!';
+            messageElement.textContent = `Tavi punkti: ${score}`;
+            scoreElement.style.display = 'none';
+        }
+    }
+
+    // Check if the answer is correct
+    function checkAnswer(selectedAnswer) {
+        const currentQuestion = questions[currentQuestionIndex];
+
+        if (selectedAnswer === currentQuestion.correctAnswer) {
+            score++;
+            messageElement.textContent = 'Pareizi!';
+            messageElement.style.color = 'green';
+        } else {
+            messageElement.textContent = 'Nepareizi! Mēģini vēlreiz.';
+            messageElement.style.color = 'red';
+        }
+
+        scoreElement.textContent = `Punkti: ${score}`;
+        currentQuestionIndex++;
+        setTimeout(showNextQuestion, 1500);
+    }
+
+    // Start the game
+    showNextQuestion();
+</script>
+
+</body>
+</html>

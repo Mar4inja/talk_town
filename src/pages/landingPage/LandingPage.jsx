@@ -2,10 +2,12 @@ import React from "react";
 import styles from "./landingPage.module.css";
 import image1Laptop from "../../images/landingPage/laptop.png";
 import image2Phones from "../../images/landingPage/rb_2150213520.png";
+import Navbar from '../../components/navbar/Navbar';
 
 const LandingPage = () => {
   return (
     <div className={styles.mainContainer}>
+      <Navbar/>
       <div className={styles.upperSquareContainer}>
         <div className={styles.upperSquare}></div>
       </div>
@@ -24,7 +26,6 @@ const LandingPage = () => {
           <span className={styles.welcome}>Welcome</span>{" "}
           <span className={styles.talkTown}>Talk Town</span>
         </h2>
-
         <p>
           Talk Town is the revolutionary social network that's reshaping the way
           we connect. Unlike any other platform, Talk Town is designed to put

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./games.module.css";
+import Navbar from '../../components/navbar/Navbar';
 
 const Games = () => {
   const gameFiles = [
@@ -34,6 +35,7 @@ const Games = () => {
 
   return (
     <div className={styles.gamesContainer}>
+      <Navbar/>
       <div className={styles.gamesGrid}>
         {gameFiles.map((game, index) => (
           <div

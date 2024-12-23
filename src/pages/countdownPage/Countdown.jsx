@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./countdown.module.css"; // Importē CSS moduļa failu
+import Navbar from '../../components/navbar/Navbar';
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
@@ -26,6 +27,7 @@ const Countdown = () => {
 
   return (
     <div className={styles.container}>
+      <Navbar/>
       <StarryBackground />
       <div className={styles.countdownContainer}>
         <h1 className={styles.heading}>Time Left Until New Year</h1>

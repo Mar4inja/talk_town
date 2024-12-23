@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css"; // Importing CSS module
 import SignInForm from "./SignIn";
 import SignUpForm from "./SignUp";
 
 export default function App() {
   const [type, setType] = useState("signIn"); // Default state is "signIn"
+
+  useEffect(() => {
+    document.body.classList.add(styles.greenBackground);
+
+    // Remove the class when the component unmounts
+    return () => {
+      document.body.classList.remove(styles.greenBackground);
+    };
+  }, []);
 
   const handleOnClick = (text) => {
     if (text !== type) {
@@ -17,10 +26,7 @@ export default function App() {
   return (
     <div className="App">
       <div className={containerClass} id="container">
-        {/* Show SignUpForm only when type is 'signUp' */}
         {type === "signUp" && <SignUpForm />}
-        
-        {/* Show SignInForm only when type is 'signIn' */}
         {type === "signIn" && <SignInForm />}
 
         <div className={styles["overlay-container"]}>

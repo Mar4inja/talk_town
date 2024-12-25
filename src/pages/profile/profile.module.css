@@ -20,7 +20,8 @@
   align-items: center;
   justify-content: start;
   height: 8vh;
-  padding: 0 0 0 10%; /* Adjust padding to add space on the left */
+  padding: 0 0 0 10%;
+  /* Adjust padding to add space on the left */
   background-color: rgb(104, 187, 31);
   border-bottom: 3px solid gray;
   border-radius: 10px 10px 0 0;
@@ -46,8 +47,7 @@
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #1d0202;
-  background: url("../../images/headerSearchBar/search-regular-24.png")
-    no-repeat 10px center;
+  background: url("../../images/headerSearchBar/search-regular-24.png") no-repeat 10px center;
   background-size: 20px 20px;
   width: 25vh;
   margin-left: 10%;
@@ -86,25 +86,141 @@
   font-size: 14px;
   margin-top: 78px;
   font-weight: bold;
-  transform: translateX(-60px); /* Pārvieto pa kreisi par 10px */
+  transform: translateX(-60px);
+  /* Pārvieto pa kreisi par 10px */
 }
 
 .profileContentContainer {
   display: flex;
   align-items: start;
   justify-content: start;
-  margin-top: 100px ;
+  margin-top: 100px;
   margin-left: 80px;
   height: 50vh;
 }
+
 .profilePhotoContainer {
+  position: relative;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
 }
+
 .profileImage {
   width: 270px;
   height: 350px;
   background-color: rgb(6, 204, 36);
   border-radius: 10px;
+}
+
+.onlineIndicator {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background-color: rgb(254, 68, 11);
+  border-radius: 50%;
+  border: 2px solid white;
+  bottom: 94%;
+  right: 58%;
+  z-index: 10;
+}
+
+
+.fullName {
+  position: relative;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 25vh;
+  margin-left: 3.5rem;
+}
+
+.locationIcon {
+  margin-left: 15px;
+  font-size: 16px;
+  color: #555;
+}
+
+.cityText {
+  position: relative;
+  margin-left: 20px;
+  font-size: 16px;
+  color: #333333b0;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10vh;
+  font-size: 14px;
+  color: #ffa500;
+  position: absolute;
+  top: 10%;
+  left: 45%;
+  transform: translateY(10px);
+  padding: 50px;
+}
+
+.ratingValue {
+  font-weight: bold;
+  margin-right: 8px;
+  color: #333;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+}
+
+.fa-star,
+.fa-star-half-alt,
+.fa-star-o {
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.fa-star-o {
+  color: #ddd;
+}
+
+.profileActionLinksContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 90%;
+  right: 10%;
+  transform: translateY(10px);
+  padding: 80px 40px;
+}
+
+.sendMessageLink,
+.isContactAproved,
+.reportUserLink {
+  margin: 0 51px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-size: 0.9rem;
+  justify-content: center;
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+.sendMessageLink img,
+.contactLink img {
+  margin-right: 15px; /* Adjust the margin as needed */
+  width: 16px; /* Adjust the size as needed */
+  height: auto;
+}
+
+.contactLink {
+  margin: 0 50px; /* Adjust margin as needed to increase space between links */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* Ensure the text stays on one line */
+  min-width: 100px; /* Set a minimum width to prevent wrapping */
 }

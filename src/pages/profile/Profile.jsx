@@ -1,8 +1,7 @@
 import styles from "./profile.module.css";
 import React, { useEffect, useState } from "react";
 import logo from "../../images/logo/logotips-removebg-preview.png";
-import MyIcon from '../../images/icons/chaty.png'
-import MyIconTwo from '../../images/icons/check-regular-24.png'
+import MyIcon from '../../images/icons/chaty.png';
 
 const Profile = () => {
   const [messageCount, setMessageCount] = useState(5);
@@ -71,11 +70,15 @@ const Profile = () => {
                 {renderStars(ranking)}
               </div>
               <div className={styles.profileActionLinksContainer}>
-              <a href="#" className={styles.sendMessageLink}> <img src={MyIcon} alt="Chat Icon" className={styles.messageIcon} />Send Message</a>
-              <a href="#" className={styles.contactLink}> <img src={MyIconTwo} alt="Check Icon" className={styles.contactIcon} />Contact</a>
-              <a href="#" className={styles.reportUserLink}>Report User</a>
+                <a href="#" className={styles.sendMessageLink}>
+                  <img src={MyIcon} alt="Chat Icon" className={styles.messageIcon} />
+                  Send Message
+                </a>
+                <a href="#" className={styles.reportUserLink}>Report User</a>
               </div>
             </div>
+            {/* Sudraba līnija */}
+            <div className={styles.silverLine}></div>
           </div>
         </div>
       </div>

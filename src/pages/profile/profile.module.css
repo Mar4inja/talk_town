@@ -231,8 +231,8 @@
   width: 160vh;
   left: 26vh; /* Sākas pie profila attēla malas */
   right: 0; /* Izstiepjas līdz konteinera beigām labajā pusē */
-  height: 2px; /* Līnijas biezums */
-  background-color: silver; /* Līnijas krāsa */
+  height: 2px; 
+  background-color: silver; 
 }
 
 

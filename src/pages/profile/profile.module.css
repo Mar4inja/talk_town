@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
+
 .blueBackground {
   background-color: rgb(11, 112, 245);
   width: 100%;
@@ -21,19 +23,19 @@
   justify-content: start;
   height: 8vh;
   padding: 0 0 0 10%;
-  /* Adjust padding to add space on the left */
-  background-color: rgb(104, 187, 31);
+  background-image: url('../../images/bonsai-tree-pot-wooden-table.jpg');
+  background-size: cover;
+ 
   border-bottom: 3px solid gray;
   border-radius: 10px 10px 0 0;
 }
 
-.headerLogo {
-  position: relative;
-  padding: 2px;
-  margin-right: 1vh;
-  width: 15vh;
-  height: auto;
-  filter: drop-shadow(1px 1px 1px rgb(1, 1, 37));
+.logoLetters {
+  font-family: "Knewave", serif;
+  font-size: 2rem;
+  color: #ffffff;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .headerButtons {
@@ -46,20 +48,28 @@
   padding: 8px 8px 8px 40px;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid #1d0202;
+  border: 1px solid #ffffff;
   background: url("../../images/headerSearchBar/search-regular-24.png") no-repeat 10px center;
+  background-color: rgba(245, 245, 245, 0.742);
   background-size: 20px 20px;
   width: 25vh;
   margin-left: 10%;
 }
 
+.profileSearchBar::placeholder {
+  color: #000000; /* Replace with your desired color */
+  opacity: 1;  /* Ensures the color is fully opaque */
+}
+
+
 .link {
   text-decoration: none;
   color: rgb(242, 242, 244);
   font-size: 16px;
-  padding: 8px;
+  margin-right: 38px;
   border-radius: 5px;
-  padding: 60px;
+  padding: 10px;
+  background-color: #007bff;
 }
 
 .link:hover {
@@ -67,9 +77,11 @@
 }
 
 .profileCircle {
-  width: 50px;
-  height: 50px;
-  background-color: blue;
+  width: 60px;
+  height: 60px;
+  background-image: url('../../images/profileP.jpg');
+  background-size: cover;
+  border: 2px solid white;
   border-radius: 50%;
   margin-left: 32%;
 }
@@ -84,10 +96,10 @@
   align-items: center;
   border-radius: 5px;
   font-size: 14px;
-  margin-top: 78px;
   font-weight: bold;
-  transform: translateX(-60px);
-  /* Pārvieto pa kreisi par 10px */
+  margin-left: -40px;  /* Adjust left margin */
+  margin-top: 11%;  /* Adjust top margin */
+  transform: translateX(0);  /* Remove translation */
 }
 
 .profileContentContainer {
@@ -95,21 +107,25 @@
   align-items: start;
   justify-content: start;
   margin-top: 100px;
-  margin-left: 80px;
+  margin-left: 250px;  /* Move content to the right */
   height: 50vh;
 }
 
 .profilePhotoContainer {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  top: 20%;  /* Adjust top position as needed */
+  left: 90px;  /* Adjust left position as needed */
 }
 
 .profileImage {
   width: 270px;
   height: 350px;
-  background-color: rgb(6, 204, 36);
+  background-image: url('../../images/profileP.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 10px;
 }
 
@@ -124,7 +140,6 @@
   right: 58%;
   z-index: 10;
 }
-
 
 .fullName {
   position: relative;
@@ -189,7 +204,7 @@
   justify-content: space-between;
   width: 100%;
   position: absolute;
-  top: 90%;
+  top: 60%;
   right: 10%;
   transform: translateY(10px);
   padding: 80px 40px;
@@ -211,30 +226,161 @@
 
 .sendMessageLink img,
 .contactLink img {
-  margin-right: 15px; /* Adjust the margin as needed */
-  width: 16px; /* Adjust the size as needed */
+  margin-right: 15px;
+  width: 16px;
   height: auto;
 }
 
 .contactLink {
-  margin: 0 50px; /* Adjust margin as needed to increase space between links */
+  margin: 0 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap; /* Ensure the text stays on one line */
-  min-width: 100px; /* Set a minimum width to prevent wrapping */
+  white-space: nowrap;
+  min-width: 100px;
 }
+
+.additionalLinksContainer {
+  position: absolute;
+  top: 77%;
+  left: 77%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin: 20px 0;
+}
+
+.additionalLink {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.additionalLink i {
+  font-size: 1.2rem;
+}
+
+.additionalLink:hover {
+  color: #0056b3;
+}
+
 
 .silverLine {
   position: absolute;
-  top: 99%; /* Līnijas vertikālā pozīcija */
-  width: 160vh;
-  left: 26vh; /* Sākas pie profila attēla malas */
-  right: 0; /* Izstiepjas līdz konteinera beigām labajā pusē */
-  height: 2px; 
-  background-color: silver; 
+  top: 99%;
+  width: 159vh;
+  left: 26vh;
+  right: 0;
+  height: 2px;
+  background-color: silver;
 }
 
+.mainTabContainer {
+  position: absolute;
+  top: 54%;
+  left: 13%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
 
+.tabContent {
+  width: 80%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
 
+.selectedTab {
+  background-color: rgb(9, 179, 246); /* Highlight selected tab */
+  padding: 7px;
+  border-radius: 12px;
+  width: 120px;
+  color: white; /* Optional: change text color */
+}
 
+.tabContent h3 {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.tabContent p {
+  margin-bottom: 10px;
+}
+
+.tabContent strong {
+  color: black;
+  font-weight: bold;
+}
+
+.tabContent span {
+  color: red;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.userInfoItem {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.userInfoText {
+  color: red;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.activeLink {
+  color: #0056b3;
+}
+
+/* For small screens (e.g., mobile phones) */
+@media (max-width: 767px) {
+  input.profile_profileSearchBar__CAIW1 {
+    /* Styles for small screens */
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* For medium screens (e.g., tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+  input.profile_profileSearchBar__CAIW1 {
+    /* Styles for medium screens */
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+
+/* For large screens (e.g., desktops) */
+@media (min-width: 992px) {
+  input.profile_profileSearchBar__CAIW1 {
+    /* Styles for large screens */
+    font-size: 18px;
+    padding: 12px;
+  }
+}
